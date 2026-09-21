@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-"""Herramienta de brainify para ordenar una carpeta de proyecto sin romper enlaces.
+"""Herramienta de brainify: estado del proyecto y orden sin romper enlaces.
 
 Subcomandos (se corren desde la raíz del proyecto):
+  estado       resumen compacto para ponerse al día (inbox, preguntas, decisiones, grafo)
+  nombres      índice de nombres de notas por carpeta (para detectar duplicados)
   inventario   lista lo que hay y qué falta ordenar -> .brainify/inventario.json
   respaldo     zip de todo el proyecto -> .brainify/respaldos/
   mover        ejecuta un plan de movimientos y corrige los enlaces
@@ -17,6 +19,8 @@ import datetime
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import unicodedata
 import zipfile
@@ -454,6 +458,9 @@ def cmd_inventario(args):
 
     archivos = []
     for rel in rels:
+        if estado_de(rel) != "por_ordenar":
+            archivos.append({"ruta": rel, "estado": estado_de(rel), "categoria": categoria(rel)})
+            continue
         info = {"ruta": rel, "estado": estado_de(rel), "categoria": categoria(rel),
                 "carpeta": rel.rsplit("/", 1)[0] if "/" in rel else "",
                 "bytes": os.path.getsize(os.path.join(raiz, rel)),
@@ -512,6 +519,12 @@ def cmd_inventario(args):
             print("  %s: %s" % (k, ", ".join(v)))
     print("Enlaces que ya estaban rotos antes de ordenar: %d" % len(rotos))
     print("Detalle por archivo: %s" % destino)
+    if getattr(args, "tabla", False) and por_ordenar:
+        print("\nPOR ORDENAR (ruta | tipo | título | palabras | usado por | vista previa):")
+        for a in por_ordenar:
+            print("%s | %s | %s | %s | %s | %s" % (
+                a["ruta"], a["categoria"], a.get("titulo") or "-", a.get("palabras", "-"),
+                len(a["usado_por"]), (a.get("vista_previa") or "")[:140]))
 
 
 # ---------------------------------------------------------------- respaldo
@@ -827,6 +840,138 @@ def cmd_deshacer(args):
         print("Nota: el frontmatter que se agregó al ordenar se conserva (no molesta).")
 
 
+# ------------------------------------------------------------ estado
+
+def leer_fm(texto):
+    """Campos simples (clave: valor) del frontmatter."""
+    campos = {}
+    if texto and texto.startswith("---\n"):
+        fin = texto.find("\n---", 3)
+        for linea in texto[4:fin if fin > 0 else 0].split("\n"):
+            m = re.match(r"^([A-Za-z_][\w\-]*)\s*:\s*(.*)$", linea)
+            if m:
+                campos[m.group(1)] = m.group(2).strip().strip("\"'")
+    return campos
+
+
+def python_de_graphify(raiz):
+    marca = os.path.join(raiz, "graphify-out", ".graphify_python")
+    if os.path.exists(marca):
+        with open(marca, encoding="utf-8") as f:
+            return f.read().strip()
+    exe = shutil.which("graphify")
+    if not exe:
+        return None
+    with open(exe, encoding="utf-8", errors="ignore") as f:
+        primera = f.readline().strip()
+    return primera[2:] if primera.startswith("#!") else None
+
+
+def correr(cmd, raiz):
+    try:
+        r = subprocess.run(cmd, cwd=raiz, capture_output=True, text=True, timeout=90)
+        return r.stdout if r.returncode == 0 else None
+    except (OSError, subprocess.SubprocessError):
+        return None
+
+
+NOMBRES_CAT = {"pdf": "PDFs", "imagen": "imágenes", "office": "archivos de Office",
+               "web": "páginas HTML", "video_audio": "videos o audios", "otro": "otros archivos"}
+
+
+def cmd_estado(args):
+    raiz = os.path.abspath(args.raiz)
+    texto_claude, _ = leer_texto(os.path.join(raiz, "CLAUDE.md"))
+    configurado = bool(texto_claude and "## brainify" in texto_claude)
+    print("Proyecto: %s | %s" % (os.path.basename(raiz),
+                                 "configurado con brainify" if configurado else "SIN CONFIGURAR"))
+    rels = listar_archivos(raiz)
+
+    inbox = [r for r in rels if r.startswith("00_inbox/") and not r.startswith("00_inbox/archive/")]
+    print("Inbox sin procesar: %d%s" % (len(inbox), (" -> " + ", ".join(
+        r.split("/", 1)[1] for r in inbox[:8]) + (" ..." if len(inbox) > 8 else "")) if inbox else ""))
+
+    por_ordenar = [r for r in rels if estado_de(r) == "por_ordenar"]
+    print("Archivos fuera de la estructura (por ordenar): %d" % len(por_ordenar))
+
+    abiertas, sin_archivar = [], []
+    orden = {"alta": 0, "media": 1, "baja": 2}
+    for r in rels:
+        if r.startswith("03_open_questions/") and "/archive/" not in r and r.endswith(".md"):
+            fm = leer_fm(leer_texto(os.path.join(raiz, r))[0] or "")
+            if fm.get("estado", "abierta").lower().startswith("resuelta"):
+                sin_archivar.append(r)
+            else:
+                abiertas.append((orden.get(fm.get("prioridad", "").lower(), 3),
+                                 fm.get("prioridad") or "sin prioridad", r.rsplit("/", 1)[-1][:-3]))
+    abiertas.sort()
+    print("Preguntas abiertas: %d" % len(abiertas))
+    for _, prio, nombre in abiertas[:10]:
+        print("  [%s] [[%s]]" % (prio, nombre))
+    if len(abiertas) > 10:
+        print("  ... y %d más" % (len(abiertas) - 10))
+    if sin_archivar:
+        print("Preguntas marcadas como resueltas sin graduar: " +
+              ", ".join("[[%s]]" % r.rsplit("/", 1)[-1][:-3] for r in sin_archivar))
+
+    def recientes(prefijo, n):
+        cands = [r for r in rels if r.startswith(prefijo) and r.endswith(".md") and "/archive/" not in r]
+        cands.sort(key=lambda r: -os.path.getmtime(os.path.join(raiz, r)))
+        return cands[:n]
+
+    decisiones = recientes("02_decisions/", 5)
+    if decisiones:
+        print("Últimas decisiones: " + ", ".join(
+            "[[%s]] (%s)" % (r.rsplit("/", 1)[-1][:-3], datetime.date.fromtimestamp(
+                os.path.getmtime(os.path.join(raiz, r))).isoformat()) for r in decisiones))
+    hace7 = datetime.datetime.now().timestamp() - 7 * 86400
+    movidas = [r for r in rels if r.endswith(".md") and estado_de(r) == "ordenado"
+               and not r.startswith("00_inbox/") and os.path.getmtime(os.path.join(raiz, r)) > hace7]
+    print("Notas creadas o editadas en los últimos 7 días: %d" % len(movidas))
+
+    if not os.path.exists(os.path.join(raiz, "graphify-out", "graph.json")):
+        print("Grafo: todavía no existe (nace con la primera nota al sincronizar).")
+        return
+    py = python_de_graphify(raiz)
+    if py:
+        codigo = ("import json; from pathlib import Path; from graphify.detect import detect_incremental; "
+                  "r=detect_incremental(Path('.')); "
+                  "print(json.dumps([f for v in r.get('new_files',{}).values() for f in v]))")
+        salida = correr([py, "-c", codigo], raiz)
+        try:
+            pend = json.loads(salida.strip().splitlines()[-1]) if salida else None
+        except (ValueError, IndexError):
+            pend = None
+        if pend is not None:
+            notas = [f for f in pend if os.path.splitext(f)[1].lower() in (".md", ".txt")]
+            otros = {}
+            for f in pend:
+                cat = categoria(f)
+                if f not in notas:
+                    otros[cat] = otros.get(cat, 0) + 1
+            print("Lectura profunda: " + (
+                "recomendada para " + ", ".join("%d %s" % (v, NOMBRES_CAT.get(k, k)) for k, v in otros.items())
+                if otros else "no hace falta") +
+                ("  (%d notas sin leer a fondo; sus enlaces ya están en el grafo)" % len(notas) if notas else ""))
+    hubs = correr(["graphify", "god-nodes", "--top", "5"], raiz)
+    if hubs:
+        nombres = re.findall(r"^\s*\d+\.\s+(.+?)\s+-\s+(\d+) edges", hubs, re.M)
+        if nombres:
+            print("Lo más conectado del grafo: " + ", ".join("%s (%s)" % n for n in nombres))
+
+
+def cmd_nombres(args):
+    raiz = os.path.abspath(args.raiz)
+    grupos = {}
+    for r in listar_archivos(raiz):
+        if r.endswith(".md") and estado_de(r) == "ordenado" and not r.startswith("00_inbox/"):
+            grupos.setdefault(carpeta_de(r), []).append(r.rsplit("/", 1)[-1][:-3])
+    for carpeta in sorted(grupos):
+        print("%s (%d): %s" % (carpeta, len(grupos[carpeta]), " · ".join(sorted(grupos[carpeta]))))
+    if not grupos:
+        print("Aún no hay notas en la estructura.")
+
+
 # ------------------------------------------------------------ a-wikilinks
 
 def cmd_a_wikilinks(args):
@@ -899,10 +1044,13 @@ def cmd_verificar(args):
 
 
 def main():
-    p = argparse.ArgumentParser(description="Ordena un proyecto brainify sin romper enlaces.")
+    p = argparse.ArgumentParser(description="Estado y orden de un proyecto brainify, sin romper enlaces.")
     p.add_argument("--raiz", default=".", help="carpeta del proyecto (por defecto, la actual)")
     sub = p.add_subparsers(dest="cmd")
-    sub.add_parser("inventario")
+    sub.add_parser("estado")
+    sub.add_parser("nombres")
+    inv = sub.add_parser("inventario")
+    inv.add_argument("--tabla", action="store_true", help="imprime lo por ordenar en formato compacto")
     sub.add_parser("respaldo")
     m = sub.add_parser("mover")
     m.add_argument("--plan", required=True)
@@ -912,7 +1060,7 @@ def main():
     d.add_argument("--registro")
     sub.add_parser("a-wikilinks")
     args = p.parse_args()
-    comandos = {"inventario": cmd_inventario, "respaldo": cmd_respaldo, "mover": cmd_mover,
+    comandos = {"estado": cmd_estado, "nombres": cmd_nombres, "inventario": cmd_inventario, "respaldo": cmd_respaldo, "mover": cmd_mover,
                 "verificar": cmd_verificar, "deshacer": cmd_deshacer,
                 "a-wikilinks": cmd_a_wikilinks}
     if args.cmd not in comandos:

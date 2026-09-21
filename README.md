@@ -79,10 +79,25 @@ Después puedes pedirle cosas con frases normales:
 
 ```
 plugins/brainify/skills/brainify/
-├── SKILL.md                  instrucciones del skill
+├── SKILL.md                  instrucciones base (cortas: se cargan en cada uso)
+├── references/               detalle por flujo, que se lee solo cuando ese flujo se activa
 ├── templates/                plantillas de notas, fichas, CLAUDE.md y .graphifyignore
-└── scripts/ordenar.py        herramienta para ordenar sin romper enlaces (Python 3, sin dependencias)
+└── scripts/brainify.py       estado del proyecto y orden sin romper enlaces (Python 3, sin dependencias)
 ```
+
+## Cuidado de los tokens
+
+brainify está diseñado para gastar poco:
+
+- **Ponerse al día** es un solo comando (`brainify.py estado`) que resume inbox, preguntas,
+  decisiones y grafo en unas 10 líneas, en vez de leer reportes o notas.
+- **La lectura profunda de Graphify** (la IA lee PDFs, imágenes y Office) se usa solo
+  cuando hace falta. Las notas que escribe brainify ya llevan sus enlaces y entran al
+  grafo gratis.
+- **El inbox queda fuera del grafo** hasta procesarse, para no leer dos veces la misma
+  información.
+- **El texto completo de papers** entra al grafo solo para los que sustentan decisiones;
+  el resto queda en su ficha.
 
 ## Créditos
 

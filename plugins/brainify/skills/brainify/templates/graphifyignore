@@ -5,7 +5,9 @@
 # 1. El propio grafo, generado por Graphify (nunca se edita a mano)
 graphify-out/
 
-# 2. Exports finales: copias para compartir, no conocimiento nuevo
+# 2. Inbox (captura cruda que aún no es conocimiento: entra al grafo cuando se
+#    procesa en notas atómicas) y exports finales (copias para compartir)
+00_inbox/
 06_exports/
 
 # 3. Borradores del skill, plantillas y configuración de Claude: sus
