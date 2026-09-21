@@ -80,8 +80,7 @@ Necesitas **Claude Code en Mac**. Lo demás (Graphify y sus extras para PDF y Of
 instala brainify la primera vez, pidiéndote un "sí".
 
 > ℹ️ **Importante:** los comandos que empiezan con `/` (como `/plugin …`) se **escriben
-> dentro del chat de Claude Code**, no en la terminal. Lo que sí va en la terminal es
-> `npx …`.
+> dentro del chat de Claude Code**, no en la terminal.
 
 ### Paso 0 opcional: si trabajas en Obsidian
 
@@ -101,23 +100,6 @@ nativo de Obsidian. En el **chat** de Claude Code escribe
 > brainify por primera vez: un plugin recién instalado queda en disco pero no aparece como
 > skill hasta abrir una sesión nueva.
 
-**O desde la terminal** (una línea):
-
-```sh
-npx skills add jlatorree/brainify
-```
-
-Queda instalado a nivel de usuario, así que está disponible en **todas** tus carpetas (no
-hay que reinstalar por proyecto).
-
-> 🔒 Mientras el repo sea privado, la instalación solo funciona en cuentas de GitHub con
-> acceso a él.
-
-### Cowork y Claude.ai
-
-No está probado. brainify necesita correr Graphify y Python en tu computador, algo que hoy
-solo está garantizado en Claude Code.
-
 ## Actualizar a una versión nueva
 
 Un plugin de marketplace **no se actualiza solo por defecto**: el clon local del
@@ -134,8 +116,6 @@ marketplace no se refresca hasta que se lo pides. Por eso conviene:
 
   El primer comando es el clave: refresca el clon local. Sin él, `/plugin update` dice
   "ya estás al día" aunque no lo estés.
-
-**Por npx:** vuelve a correr `npx skills add jlatorree/brainify` en la terminal.
 
 ## La estructura (para cuando quieras el detalle)
 
