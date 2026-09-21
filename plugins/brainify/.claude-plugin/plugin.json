@@ -1,0 +1,12 @@
+{
+  "name": "brainify",
+  "description": "Gestiona proyectos complejos en una carpeta que es a la vez vault de Obsidian y grafo de conocimiento de Graphify. Configura y ordena la carpeta sola, procesa el inbox, captura conocimiento, gestiona preguntas abiertas, investiga literatura citando cada afirmación y organiza entregables.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan La Torre",
+    "url": "https://github.com/jlatorree"
+  },
+  "homepage": "https://github.com/jlatorree/brainify",
+  "repository": "https://github.com/jlatorree/brainify",
+  "keywords": ["obsidian", "graphify", "knowledge-graph", "second-brain", "project-management", "research"]
+}

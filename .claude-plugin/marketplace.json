@@ -1,0 +1,17 @@
+{
+  "name": "brainify",
+  "owner": {
+    "name": "Jonathan La Torre",
+    "url": "https://github.com/jlatorree"
+  },
+  "metadata": {
+    "description": "Brainify: el cerebro de tus proyectos complejos, sobre Obsidian y Graphify."
+  },
+  "plugins": [
+    {
+      "name": "brainify",
+      "source": "./plugins/brainify",
+      "description": "Gestiona proyectos complejos en una carpeta que es a la vez vault de Obsidian y grafo de conocimiento de Graphify. Configura y ordena la carpeta sola, procesa el inbox, captura conocimiento, gestiona preguntas abiertas, investiga literatura citando cada afirmación y organiza entregables."
+    }
+  ]
+}
