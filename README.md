@@ -1,107 +1,199 @@
 # brainify
 
-Plugin de [Claude Code](https://claude.com/claude-code) que convierte una carpeta en el
-cerebro de un proyecto complejo: un vault de [Obsidian](https://obsidian.md) que además
-es un grafo de conocimiento de [Graphify](https://github.com/Graphify-Labs/graphify).
+Un skill que convierte cada proyecto en un **segundo cerebro**: una carpeta que es a la
+vez vault de Obsidian y grafo de conocimiento. Para que dejes de acumular archivos sueltos
+y puedas preguntarle a tu proyecto qué sabe, qué decidiste y qué falta. Funciona en
+**Claude Code**.
 
-Está pensado para quien no programa: brainify corre los comandos por ti y te explica
-en simple qué hizo.
+## La idea en 30 segundos
 
-## Qué hace
+Piensa en cada proyecto como un **cerebro propio**. Tiene seis cosas:
 
-- **Configura la carpeta sola** la primera vez que lo invocas: crea la estructura de
-  carpetas, el `.graphifyignore`, el `CLAUDE.md` del proyecto y la conexión con Graphify.
-- **Ordena el avance que ya tenías:** si la carpeta ya tiene notas, subcarpetas, PDFs,
-  imágenes o canvas, los reparte en la estructura sin romper los enlaces de Obsidian.
-  Antes hace un respaldo, y todo se puede deshacer.
-- **Te pone al día** al empezar cada sesión: estado del proyecto, decisiones recientes,
-  preguntas abiertas y lo que falta procesar.
-- **Procesa el inbox,** incluidas las notas de reunión, en notas atómicas enlazadas, y lo
-  deja vacío (los originales quedan respaldados en `.brainify/`, fuera de la vista).
-- **Guarda el conocimiento** que surge conversando ("guarda esto").
-- **Gestiona las preguntas abiertas** y las gradúa a conocimiento o decisiones cuando
-  se resuelven.
-- **Investiga literatura académica** con el deep research de Claude Code y guarda el
-  resultado a la manera de brainify: una ficha por paper y un informe que cita cada
-  afirmación con su link.
-- **Ubica e indexa entregables** generados por otros skills: informes, diagramas,
-  exceles y presentaciones.
+- 📥 **El inbox:** donde sueltas todo (apuntes, notas de reunión, PDFs). Se vacía al
+  procesarse.
+- 🧠 **El conocimiento:** notas atómicas, una idea por nota, siempre conectadas. Incluye
+  las **decisiones** (con su porqué) y las **preguntas abiertas**.
+- 📚 **Las fuentes:** una ficha por paper o página web, con su cita lista para usar.
+- 📦 **Los entregables:** informes, diagramas, presentaciones. Cada uno dice de qué notas
+  y fuentes nació.
+- 🕸️ **El grafo** ([Graphify](https://github.com/Graphify-Labs/graphify)): el mapa de
+  conexiones que Claude consulta en vez de releerlo todo.
+- 🤖 **El guía** (Claude): corre cada comando por ti y te cuenta en simple qué hizo.
 
-## La estructura que crea
+Y un flujo, siempre en la misma dirección:
 
-```
-<tu proyecto>/
-├── 00_inbox/             capturas rápidas y notas de reunión (se vacía al procesarse)
-├── 01_knowledge/         conocimiento: una idea por nota, siempre enlazada
-├── 02_decisions/         decisiones y su porqué
-├── 03_open_questions/    preguntas abiertas (archive/ para las resueltas)
-├── 04_sources/           literature/ (papers) y web/ (fuentes web)
-├── 05_deliverables/      reports/, diagrams/, data/ y presentations/
-├── 06_exports/           copias finales para compartir
-└── CLAUDE.md             hace que cada sesión en la carpeta arranque con brainify
-```
+> **Sueltas algo en el inbox o conversas → se vuelve notas conectadas → las preguntas se
+> gradúan en conocimiento o decisiones → los entregables citan sus fuentes → el grafo se
+> actualiza solo.**
+
+Eso es todo. Lo demás son detalles que brainify maneja por ti.
+
+## Por qué funciona así (la filosofía)
+
+El conocimiento no vive en los documentos: vive en las **conexiones** entre ellos. Una
+nota suelta es un dato; conectada a otras, empieza a ser una idea. brainify existe para que
+esas conexiones no se pierdan, y para que se puedan consultar.
+
+1. **Enlazar es construir.** Cada nota se conecta con otras. Graphify convierte esas
+   conexiones en un grafo, y Claude responde consultando el grafo en vez de leer todo.
+2. **Tú no programas; Claude sí.** No hay comandos que aprender. brainify corre todo y te
+   explica qué hizo, dónde quedó y qué sigue.
+3. **Toda afirmación con su fuente.** Cada dato de un informe lleva **doble cita**: el link
+   real, para verificarlo, y la ficha de la fuente, para que quede conectado en el grafo.
+4. **Nada se pierde.** Lo procesado se mueve, no se borra. Antes de reordenar hay un
+   respaldo, y todo orden se puede deshacer.
+5. **Barato por diseño.** Ponerse al día es un solo comando; la lectura cara (PDFs,
+   imágenes) se hace solo cuando hace falta.
+
+## Cómo se usa (es conversacional)
+
+Abres Claude Code en la carpeta del proyecto y escribes **brainify**. Después le hablas con
+frases normales:
+
+| Dices | brainify |
+| --- | --- |
+| "ponme al día" | resume el estado, las decisiones recientes, las preguntas abiertas y el inbox |
+| "procesa el inbox" | convierte apuntes y notas de reunión en notas conectadas, y deja el inbox vacío |
+| "guarda esto" | guarda lo que surgió en la conversación como una nota conectada |
+| "qué preguntas siguen abiertas" | lista las preguntas por prioridad y gradúa las resueltas |
+| "investiga la literatura sobre..." | lanza el deep research de Claude Code y guarda fichas e informe con doble cita |
+| "haz un informe de..." / "dónde guardo este entregable" | lo arma o lo ubica, crea su ficha y lo conecta |
+| "ordena esta carpeta" | reparte archivos sueltos en la estructura sin romper enlaces |
+| "añadí notas nuevas" | pone el grafo al día con lo que escribiste en Obsidian |
+
+También puedes invocarlo por nombre: `/brainify` (o `/brainify:brainify` si lo instalaste
+como plugin).
+
+## Los tres modos
+
+brainify detecta el estado de la carpeta y actúa según corresponda:
+
+| Estado | Modo | Qué hace |
+| --- | --- | --- |
+| Carpeta vacía | **Configurar** | Crea la estructura, el `CLAUDE.md` del proyecto y la conexión con Graphify. Si falta Graphify, lo instala (con tu OK). |
+| Carpeta con avance previo | **Ordenar** | Hace inventario, te propone un plan y, **con un solo OK**, respalda, mueve todo a su lugar y corrige cada enlace de Obsidian. Se puede deshacer. |
+| Proyecto que ya usa brainify | **Ponerse al día** | Te resume inbox, preguntas, decisiones y el estado del grafo en unas líneas. |
 
 ## Instalación
 
-Dentro de Claude Code, escribe estos dos comandos (uno a la vez):
+Necesitas **Claude Code en Mac**. Lo demás (Graphify y sus extras para PDF y Office) lo
+instala brainify la primera vez, pidiéndote un "sí".
 
-```
-/plugin marketplace add jlatorree/brainify
-```
+> ℹ️ **Importante:** los comandos que empiezan con `/` (como `/plugin …`) se **escriben
+> dentro del chat de Claude Code**, no en la terminal. Lo que sí va en la terminal es
+> `npx …`.
 
-```
-/plugin install brainify@brainify
-```
+### Paso 0 opcional: si trabajas en Obsidian
 
-Lo que brainify necesita y **él mismo instala la primera vez** (te pide un "sí" antes):
+Los skills de Obsidian de kepano ayudan a que el markdown (frontmatter, wikilinks) salga
+nativo de Obsidian. En el **chat** de Claude Code escribe
+`/plugin marketplace add kepano/obsidian-skills` (o en la terminal,
+`npx skills add kepano/obsidian-skills`). Es una mejora, no un requisito.
 
-- [Graphify](https://github.com/Graphify-Labs/graphify) (paquete `graphifyy`), con
-  soporte de PDF y Office.
-- [uv](https://docs.astral.sh/uv/), el instalador de Graphify. Si no está, brainify lo
-  instala con [Homebrew](https://brew.sh).
+### Claude Code
 
-## Uso
+**Desde el chat**, por marketplace (escribe estas dos líneas en el chat, no en la terminal):
 
-1. Abre Claude Code en la carpeta de tu proyecto (nueva o con avance).
-2. Escribe **brainify**.
+    /plugin marketplace add jlatorree/brainify
+    /plugin install brainify@brainify
 
-Después puedes pedirle cosas con frases normales:
+> ℹ️ Tras instalar por marketplace, **reinicia tu sesión de Claude Code** antes de usar
+> brainify por primera vez: un plugin recién instalado queda en disco pero no aparece como
+> skill hasta abrir una sesión nueva.
 
-| Dices | brainify |
-|---|---|
-| "ponme al día" | resume el estado, las decisiones recientes y las preguntas abiertas |
-| "ordena esta carpeta" | reparte los archivos sueltos en la estructura sin romper enlaces |
-| "procesa el inbox" | convierte capturas y notas de reunión en notas enlazadas |
-| "guarda esto" | crea una nota atómica enlazada con lo que se habló |
-| "qué preguntas siguen abiertas" | lista las preguntas pendientes por prioridad |
-| "investiga la literatura sobre..." | lanza el deep research de Claude Code y guarda fichas e informe citado |
-| "dónde guardo este entregable" | lo ubica, crea su ficha y lo mete al grafo |
+**O desde la terminal** (una línea):
 
-## Qué hay en el plugin
-
-```
-plugins/brainify/skills/brainify/
-├── SKILL.md                  instrucciones base (cortas: se cargan en cada uso)
-├── references/               detalle por flujo, que se lee solo cuando ese flujo se activa
-├── templates/                plantillas de notas, fichas, CLAUDE.md y .graphifyignore
-└── scripts/brainify.py       estado del proyecto y orden sin romper enlaces (Python 3, sin dependencias)
+```sh
+npx skills add jlatorree/brainify
 ```
 
-## Cuidado de los tokens
+Queda instalado a nivel de usuario, así que está disponible en **todas** tus carpetas (no
+hay que reinstalar por proyecto).
 
-brainify está diseñado para gastar poco:
+> 🔒 Mientras el repo sea privado, la instalación solo funciona en cuentas de GitHub con
+> acceso a él.
 
-- **Ponerse al día** es un solo comando (`brainify.py estado`) que resume inbox, preguntas,
-  decisiones y grafo en unas 10 líneas, en vez de leer reportes o notas.
-- **La lectura profunda de Graphify** (la IA lee PDFs, imágenes y Office) se usa solo
-  cuando hace falta. Las notas que escribe brainify ya llevan sus enlaces y entran al
-  grafo gratis.
-- **El inbox queda fuera del grafo** hasta procesarse, para no leer dos veces la misma
-  información.
-- **Los papers los lee el deep research de Claude Code;** al grafo entra su ficha, y el
-  PDF queda guardado junto a ella sin que Graphify lo vuelva a leer.
+### Cowork y Claude.ai
 
-## Créditos
+No está probado. brainify necesita correr Graphify y Python en tu computador, algo que hoy
+solo está garantizado en Claude Code.
 
-Graphify es un proyecto de [Graphify Labs](https://github.com/Graphify-Labs/graphify).
-brainify lo usa como motor del grafo de conocimiento.
+## Actualizar a una versión nueva
+
+Un plugin de marketplace **no se actualiza solo por defecto**: el clon local del
+marketplace no se refresca hasta que se lo pides. Por eso conviene:
+
+- **Recomendado, una sola vez:** en el chat abre `/plugin` → pestaña **Marketplaces** →
+  **brainify** → activa **auto-update**. Desde entonces, cada versión nueva llega sola al
+  abrir una sesión.
+- **Manual:** en el chat de Claude Code,
+
+      /plugin marketplace update brainify
+      /plugin update brainify@brainify
+      /reload-plugins
+
+  El primer comando es el clave: refresca el clon local. Sin él, `/plugin update` dice
+  "ya estás al día" aunque no lo estés.
+
+**Por npx:** vuelve a correr `npx skills add jlatorree/brainify` en la terminal.
+
+## La estructura (para cuando quieras el detalle)
+
+brainify crea esto en cada proyecto:
+
+```
+00_inbox/                 lo que sueltas: se vacía al procesarse
+01_knowledge/             conocimiento: una idea por nota
+02_decisions/             decisiones, su porqué y alternativas descartadas
+03_open_questions/        una pregunta por archivo (archive/ para las ya graduadas)
+04_sources/literature/    una ficha por paper (+ su PDF)
+04_sources/web/           una ficha por fuente web
+05_deliverables/          reports/, diagrams/, data/, presentations/ (cada uno con su ficha)
+06_exports/               copias finales para compartir
+CLAUDE.md                 hace que cada sesión en la carpeta arranque con brainify
+.brainify/                respaldos, inbox ya procesado y registros (oculto en Obsidian)
+```
+
+### La distinción que importa: nota, fuente y entregable
+
+- **Una nota** (`01` a `03`) es lo que *sabes*: una idea, una decisión o una pregunta. Está
+  viva: se amplía con el tiempo.
+- **Una fuente** (`04`) es lo que *leíste*: una ficha por paper o web, con su cita y sus
+  hallazgos. Los papers los lee el deep research de Claude Code; brainify guarda la ficha.
+- **Un entregable** (`05`) es lo que *produjiste* para alguien: dice de qué notas y
+  fuentes nació. La copia que envías va a `06_exports/`.
+
+**¿Y la bandeja de entrada?** Es solo de paso: todo lo que entra se procesa en notas y el
+inbox queda vacío. Los originales se guardan en `.brainify/`, fuera de la vista.
+
+### El grafo, y por qué brainify gasta poco
+
+- **Sincronizar el grafo es gratis:** Graphify registra notas y conexiones en segundos, sin
+  IA. Las notas que escribe brainify ya llevan sus conexiones.
+- **La lectura profunda** (la IA lee PDFs, imágenes y Office) se usa solo cuando hace falta.
+- **Ponerse al día es un solo comando** que resume todo en unas 10 líneas, en vez de leer
+  reportes o notas.
+- **El inbox y los PDFs de papers quedan fuera del grafo:** el inbox se procesa en notas, y
+  cada paper ya está representado por su ficha. Nada se lee dos veces.
+
+## Qué incluye el skill
+
+Estructura de plugin: el skill vive en `skills/brainify/`, con su manifiesto en
+`.claude-plugin/`.
+
+| Archivo | Rol |
+| ------- | --- |
+| `skills/brainify/SKILL.md` | El skill: vocabulario, estructura y los ocho flujos. Corto, porque se carga en cada uso. |
+| `skills/brainify/references/configurar.md` | Configurar una carpeta nueva (instala Graphify si falta). |
+| `skills/brainify/references/ordenar.md` | Ordenar una carpeta con avance previo sin romper enlaces. |
+| `skills/brainify/references/investigar.md` | Encargo al deep research y cómo guardar su resultado. |
+| `skills/brainify/references/entregables.md` | Dónde vive cada entregable, fichas, PDFs y versiones. |
+| `skills/brainify/references/problemas.md` | Qué hacer cuando Graphify falla. |
+| `skills/brainify/templates/` | Plantillas de nota, ficha de paper, ficha web, ficha de entregable, `CLAUDE.md` y `.graphifyignore`. |
+| `skills/brainify/scripts/brainify.py` | Estado del proyecto, índice de notas y orden sin romper enlaces (inventario, respaldo, mover, verificar, deshacer). Python 3, sin dependencias. |
+| `.claude-plugin/{plugin,marketplace}.json` | Manifiestos para instalar vía plugin/marketplace. |
+
+---
+
+*Usa [Graphify](https://github.com/Graphify-Labs/graphify) como motor del grafo de
+conocimiento. Inspirado en [Many Brains](https://github.com/jlatorree/many-brains).*

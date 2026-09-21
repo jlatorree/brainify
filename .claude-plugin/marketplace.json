@@ -1,17 +1,32 @@
 {
   "name": "brainify",
   "owner": {
-    "name": "Jonathan La Torre",
+    "name": "jlatorree",
     "url": "https://github.com/jlatorree"
   },
-  "metadata": {
-    "description": "Brainify: el cerebro de tus proyectos complejos, sobre Obsidian y Graphify."
-  },
+  "description": "Brainify: un segundo cerebro por proyecto, en Obsidian + Graphify.",
   "plugins": [
     {
       "name": "brainify",
-      "source": "./plugins/brainify",
-      "description": "Gestiona proyectos complejos en una carpeta que es a la vez vault de Obsidian y grafo de conocimiento de Graphify. Configura y ordena la carpeta sola, procesa el inbox, captura conocimiento, gestiona preguntas abiertas, investiga literatura citando cada afirmación y organiza entregables."
+      "source": "./",
+      "description": "Segundo cerebro de proyectos en Obsidian + Graphify: configura y ordena la carpeta, procesa el inbox en notas atómicas conectadas, gestiona preguntas y decisiones, guarda la investigación de literatura con doble cita y organiza entregables. Gasta pocos tokens: consulta el grafo en vez de releerlo todo.",
+      "author": {
+        "name": "jlatorree",
+        "url": "https://github.com/jlatorree"
+      },
+      "homepage": "https://github.com/jlatorree/brainify",
+      "repository": "https://github.com/jlatorree/brainify",
+      "keywords": [
+        "knowledge-management",
+        "pkm",
+        "obsidian",
+        "graphify",
+        "knowledge-graph",
+        "second-brain",
+        "research"
+      ],
+      "category": "productivity",
+      "version": "1.2.1"
     }
   ]
 }

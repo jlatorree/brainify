@@ -1,0 +1,20 @@
+{
+  "name": "brainify",
+  "version": "1.2.1",
+  "description": "Segundo cerebro de proyectos en Obsidian + Graphify: configura y ordena la carpeta, procesa el inbox en notas atómicas conectadas, gestiona preguntas y decisiones, guarda la investigación de literatura con doble cita y organiza entregables. Gasta pocos tokens: consulta el grafo en vez de releerlo todo.",
+  "author": {
+    "name": "Jonathan Latorre",
+    "url": "https://github.com/jlatorree"
+  },
+  "homepage": "https://github.com/jlatorree/brainify",
+  "repository": "https://github.com/jlatorree/brainify",
+  "keywords": [
+    "knowledge-management",
+    "pkm",
+    "obsidian",
+    "graphify",
+    "knowledge-graph",
+    "second-brain",
+    "research"
+  ]
+}
