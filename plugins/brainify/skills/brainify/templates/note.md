@@ -5,7 +5,7 @@ fecha: <AAAA-MM-DD>
 proyecto: "<nombre del proyecto>"
 tags: [<tema-1>, <tema-2>]
 relacionadas: ["[[nota-existente-1]]", "[[nota-existente-2]]"]
-origen: "<[[nota-del-inbox-archivada]] o conversación AAAA-MM-DD>"
+origen: "<nombre-del-original (inbox, AAAA-MM-DD) o conversación AAAA-MM-DD>"
 # estado: decisión = propuesta | tomada | revertida; pregunta = abierta | resuelta; conocimiento = borra el campo
 estado: <según el tipo>
 # Solo decisiones:

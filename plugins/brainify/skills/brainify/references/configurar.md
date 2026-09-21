@@ -28,7 +28,7 @@ el mensaje final.
 3. **Carpetas** (`mkdir -p` respeta lo que ya existe):
 
    ```bash
-   mkdir -p 00_inbox/archive 01_knowledge 02_decisions 03_open_questions/archive 04_sources/literature 04_sources/web 05_deliverables/reports 05_deliverables/diagrams 05_deliverables/data 05_deliverables/presentations 06_exports
+   mkdir -p 00_inbox 01_knowledge 02_decisions 03_open_questions/archive 04_sources/literature 04_sources/web 05_deliverables/reports 05_deliverables/diagrams 05_deliverables/data 05_deliverables/presentations 06_exports
    ```
 4. **`.graphifyignore`:** copia `templates/graphifyignore` del skill como
    `.graphifyignore`. Si ya existe, agrega al final solo las líneas que le falten.

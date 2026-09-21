@@ -26,7 +26,7 @@ en `.brainify/`, fuera del grafo.
    |---|---|
    | Nota clara de un solo tipo (una idea, una decisión o una pregunta) | `01_knowledge/`, `02_decisions/` o `03_open_questions/`, con `tipo` (y `estado` si aplica) |
    | Notas de reunión, notas largas con varias ideas, borradores, apuntes | `00_inbox/` (después se procesan con el flujo 2) |
-   | Resumen de un paper o PDF académico | `04_sources/literature/` |
+   | Resumen de un paper o PDF académico | `04_sources/literature/` (a un PDF sin ficha, ofrécele crearla: la ficha es lo que entra al grafo) |
    | Recorte o ficha de una página web | `04_sources/web/` |
    | Informe, documento de trabajo o entregable | `05_deliverables/<reports, diagrams, data o presentations>/` |
    | Canvas de Obsidian (`.canvas`) | `05_deliverables/diagrams/` |

@@ -28,7 +28,11 @@ docs/
 *.mp4
 .DS_Store
 
-# 6. Presentaciones: el binario no se puede leer. Lo que entra al grafo es su
+# 6. PDFs de papers y fuentes: los lee Claude al investigar y los representa su
+#    ficha .md, que sí entra al grafo.
+04_sources/**/*.pdf
+
+# 7. Presentaciones: el binario no se puede leer. Lo que entra al grafo es su
 #    ficha .md y su PDF exportado, que viven en la misma carpeta.
 *.key
 *.pptx

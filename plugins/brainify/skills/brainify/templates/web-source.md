@@ -9,7 +9,6 @@ autor: "<autor u organización>"
 tipo_fuente: <institucional | datos oficiales | informe de industria | prensa | blog | otro>
 publicado: <AAAA-MM-DD o desconocido>
 consultado: <AAAA-MM-DD>
-texto_completo: "<[[archivo-traido-con-graphify-add]] o no>"
 fiabilidad: <alta | media | baja>
 proyecto: "<nombre del proyecto>"
 tags: [fuente, <tema>]

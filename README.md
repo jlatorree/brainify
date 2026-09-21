@@ -16,12 +16,14 @@ en simple qué hizo.
   Antes hace un respaldo, y todo se puede deshacer.
 - **Te pone al día** al empezar cada sesión: estado del proyecto, decisiones recientes,
   preguntas abiertas y lo que falta procesar.
-- **Procesa el inbox,** incluidas las notas de reunión, en notas atómicas enlazadas.
+- **Procesa el inbox,** incluidas las notas de reunión, en notas atómicas enlazadas, y lo
+  deja vacío (los originales quedan respaldados en `.brainify/`, fuera de la vista).
 - **Guarda el conocimiento** que surge conversando ("guarda esto").
 - **Gestiona las preguntas abiertas** y las gradúa a conocimiento o decisiones cuando
   se resuelven.
-- **Investiga literatura académica** con un protocolo de validez, impacto y actualidad,
-  y cita cada afirmación con su link.
+- **Investiga literatura académica** con el deep research de Claude Code y guarda el
+  resultado a la manera de brainify: una ficha por paper y un informe que cita cada
+  afirmación con su link.
 - **Ubica e indexa entregables** generados por otros skills: informes, diagramas,
   exceles y presentaciones.
 
@@ -29,7 +31,7 @@ en simple qué hizo.
 
 ```
 <tu proyecto>/
-├── 00_inbox/             capturas rápidas y notas de reunión (archive/ para lo procesado)
+├── 00_inbox/             capturas rápidas y notas de reunión (se vacía al procesarse)
 ├── 01_knowledge/         conocimiento: una idea por nota, siempre enlazada
 ├── 02_decisions/         decisiones y su porqué
 ├── 03_open_questions/    preguntas abiertas (archive/ para las resueltas)
@@ -72,7 +74,7 @@ Después puedes pedirle cosas con frases normales:
 | "procesa el inbox" | convierte capturas y notas de reunión en notas enlazadas |
 | "guarda esto" | crea una nota atómica enlazada con lo que se habló |
 | "qué preguntas siguen abiertas" | lista las preguntas pendientes por prioridad |
-| "investiga la literatura sobre..." | busca, selecciona y ficha papers, y redacta un informe citado |
+| "investiga la literatura sobre..." | lanza el deep research de Claude Code y guarda fichas e informe citado |
 | "dónde guardo este entregable" | lo ubica, crea su ficha y lo mete al grafo |
 
 ## Qué hay en el plugin
@@ -96,8 +98,8 @@ brainify está diseñado para gastar poco:
   grafo gratis.
 - **El inbox queda fuera del grafo** hasta procesarse, para no leer dos veces la misma
   información.
-- **El texto completo de papers** entra al grafo solo para los que sustentan decisiones;
-  el resto queda en su ficha.
+- **Los papers los lee el deep research de Claude Code;** al grafo entra su ficha, y el
+  PDF queda guardado junto a ella sin que Graphify lo vuelva a leer.
 
 ## Créditos
 

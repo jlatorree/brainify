@@ -27,7 +27,7 @@ import zipfile
 from urllib.parse import unquote
 
 ESTRUCTURA = [
-    "00_inbox/archive", "01_knowledge", "02_decisions", "03_open_questions/archive",
+    "00_inbox", "01_knowledge", "02_decisions", "03_open_questions/archive",
     "04_sources/literature", "04_sources/web", "05_deliverables/reports",
     "05_deliverables/diagrams", "05_deliverables/data", "05_deliverables/presentations",
     "06_exports",

@@ -9,7 +9,7 @@ doi: "<10.xxxx/xxxxx o sin DOI>"
 # source_url: Graphify copia este campo a cada concepto que extrae de la nota,
 # así cada respuesta del grafo lleva su link de origen.
 source_url: "<https://doi.org/10.xxxx/xxxxx o enlace canónico>"
-texto_completo: "<[[archivo-traido-con-graphify-add]], [[pdf-guardado]] o no disponible>"
+pdf: "<apellido-anio-palabra-clave.pdf si está guardado junto a la ficha, o no>"
 peer_reviewed: <sí | no | preprint>
 tipo_trabajo: <empírico | revisión sistemática | meta-análisis | teórico | fundacional>
 metodo: "<diseño en pocas palabras: encuesta, experimento, caso, etnografía...>"
@@ -28,8 +28,9 @@ relacionadas: ["[[pregunta-o-decision-que-ilumina]]", "[[informe-que-lo-cita]]"]
 <!--
 Instrucciones de la plantilla (bórralas al crear la nota):
 - Nombre del archivo: apellido-anio-palabra-clave.md (ej. vaswani-2017-transformer.md).
-- Resume solo lo que realmente leíste. Si solo accediste al abstract, dilo en "leido".
-- Nunca inventes datos, DOIs ni citas textuales. Verifica que el DOI resuelva en doi.org.
+- Se llena con lo que devolvió el deep research (o con lo que leíste del PDF). Un dato
+  que no está queda como "no reportado"; en "leido", si fue completo o solo el abstract.
+- Cada dato y cada cita textual salen de la fuente, y el DOI responde 302 en doi.org.
 - Quita todos los placeholders <...>.
 -->
 
