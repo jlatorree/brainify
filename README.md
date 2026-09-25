@@ -1,7 +1,7 @@
 # brainify
 
 Un skill de **Claude Code** que convierte cada proyecto en un **segundo cerebro**: una
-carpeta que es a la vez vault de Obsidian y grafo de conocimiento. Para dejar de acumular
+carpeta de notas markdown que es a la vez grafo de conocimiento (ideal para abrirla en Obsidian). Para dejar de acumular
 archivos sueltos y poder preguntarle a tu proyecto qué sabe, qué decidiste y qué falta.
 
 ## La idea en 30 segundos
@@ -50,12 +50,13 @@ solo OK y reversible) o te **pone al día** (ya usa brainify).
 
 - **Mac con Claude Code.**
 - **[Homebrew](https://brew.sh)**: instálalo tú antes, porque pide tu contraseña. Trae de
-  paso Python 3, que brainify también usa.
+  paso Python 3, que brainify también usa. [Guía paso a paso](https://claude.ai/artifact/D9QNftYYdY1QW4huHFPPGi).
 
 La primera vez, y con tu OK, brainify instala el resto: Graphify y sus extras para leer
 **PDF, Word y Excel**. Sin esos extras, esos archivos quedan fuera del grafo.
 
-Opcional: **Keynote**, para exportar presentaciones a PDF y que entren al grafo.
+Opcional: **[Obsidian](https://obsidian.md)**, para ver y editar las notas, y **Keynote**,
+para exportar presentaciones a PDF y que entren al grafo.
 
 ## Instalación
 

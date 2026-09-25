@@ -1,6 +1,6 @@
 ---
 name: brainify
-description: 'Segundo cerebro de proyectos en Obsidian + Graphify. Úsalo cuando el usuario diga "brainify" o quiera: configurar u ordenar la carpeta del proyecto, ponerse al día, procesar el inbox o notas de reunión, guardar algo que surgió ("guarda esto"), revisar o resolver preguntas abiertas, investigar literatura académica, hacer un informe, guardar un entregable, o avise que añadió notas.'
+description: 'Segundo cerebro de proyectos con Graphify, en carpetas de notas markdown (ideal para Obsidian). Úsalo cuando el usuario diga "brainify" o quiera: configurar u ordenar la carpeta del proyecto, ponerse al día, procesar el inbox o notas de reunión, guardar algo que surgió ("guarda esto"), revisar o resolver preguntas abiertas, investigar literatura académica, hacer un informe, guardar un entregable, o avise que añadió notas.'
 ---
 
 # Brainify

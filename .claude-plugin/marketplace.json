@@ -4,12 +4,12 @@
     "name": "jlatorree",
     "url": "https://github.com/jlatorree"
   },
-  "description": "Brainify: un segundo cerebro por proyecto, en Obsidian + Graphify.",
+  "description": "Brainify: un segundo cerebro por proyecto, con Graphify (ideal para Obsidian).",
   "plugins": [
     {
       "name": "brainify",
       "source": "./",
-      "description": "Segundo cerebro de proyectos en Obsidian + Graphify: configura y ordena la carpeta, procesa el inbox en notas atómicas conectadas, gestiona preguntas y decisiones, guarda la investigación de literatura con doble cita y organiza entregables. Gasta pocos tokens: consulta el grafo en vez de releerlo todo.",
+      "description": "Segundo cerebro de proyectos con Graphify, en carpetas de notas markdown (ideal para Obsidian): configura y ordena la carpeta, procesa el inbox en notas atómicas conectadas, gestiona preguntas y decisiones, guarda la investigación de literatura con doble cita y organiza entregables. Gasta pocos tokens: consulta el grafo en vez de releerlo todo.",
       "author": {
         "name": "jlatorree",
         "url": "https://github.com/jlatorree"
@@ -26,7 +26,7 @@
         "research"
       ],
       "category": "productivity",
-      "version": "1.3.2"
+      "version": "1.3.3"
     }
   ]
 }
