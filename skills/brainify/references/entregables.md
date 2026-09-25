@@ -7,17 +7,16 @@ skills; brainify decide dónde vive cada uno y lo conecta al grafo.
 ficha enlaza lo que lo sustenta, y el grafo está sincronizado.
 
 **"Haz un informe de...":** reúne el contexto con consultas. Si basta un informe en
-markdown, escríbelo en `05_deliverables/reports/` citando notas con wikilinks (y
+markdown, escríbelo en `05_exports/reports/` citando notas con wikilinks (y
 fuentes con doble cita). Si piden un formato rico (HTML, diagrama, presentación,
 excel), usa el skill que corresponda y guarda aquí el resultado.
 
 | Entregable | Carpeta | ¿Graphify lo lee? | Qué haces |
 |---|---|---|---|
-| Informe `.md` / `.html` | `05_deliverables/reports/` | Sí | Frontmatter y wikilinks a sus fuentes (en `.html`, ficha) |
-| Diagrama `.png` `.jpg` `.svg` | `05_deliverables/diagrams/` | Sí, como imagen (lectura profunda) | Ficha |
-| Excel / Word `.xlsx` `.docx` | `05_deliverables/data/` | Sí, con el extra `office` (lectura profunda) | Ficha |
-| Presentación `.key` `.pptx` | `05_deliverables/presentations/` | Su PDF sí (extra `pdf`); el binario no | Ficha + PDF exportado |
-| Copia final para compartir | `06_exports/` | No (ignorado) | Copiar con `cp`; el original se queda en `05` |
+| Informe `.md` / `.html` | `05_exports/reports/` | Sí | Frontmatter y wikilinks a sus fuentes (en `.html`, ficha) |
+| Diagrama `.png` `.jpg` `.svg` | `05_exports/diagrams/` | Sí, como imagen (lectura profunda) | Ficha |
+| Excel / Word `.xlsx` `.docx` | `05_exports/data/` | Sí, con el extra `office` (lectura profunda) | Ficha |
+| Presentación `.key` `.pptx` | `05_exports/presentations/` | Su PDF sí (extra `pdf`); el binario no | Ficha + PDF exportado |
 
 - **Ficha:** con `templates/deliverable-card.md`, junto al archivo y con el mismo
   nombre en `.md` (`diagrama-journey-v2.png` tiene la ficha `diagrama-journey-v2.md`).
@@ -42,9 +41,7 @@ excel), usa el skill que corresponda y guarda aquí el resultado.
   Si falla, pide al usuario que lo exporte a mano (Keynote: Archivo > Exportar a >
   PDF) en la misma carpeta.
 - **Versiones:** cada versión entregada se conserva. Una versión nueva es un archivo
-  nuevo (`-v2`) y una fila más en el historial de la ficha.
-- **Exports finales:** copia a `06_exports/` como
-  `<proyecto>-<entregable>-vN-<AAAA-MM-DD>.<ext>` y anota la ruta en la ficha
-  (`export_final`).
+  nuevo (`-v2`) y una fila más en el historial de la ficha. La que se envía es la
+  misma de `05_exports/`: no hay copias aparte; en la ficha, `estado: final`.
 - Al terminar: sincroniza. Si hay imágenes, PDFs u Office nuevos y el usuario quiere
   que el grafo lea su contenido, lectura profunda.

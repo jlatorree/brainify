@@ -28,11 +28,10 @@ en `.brainify/`, fuera del grafo.
    | Notas de reunión, notas largas con varias ideas, borradores, apuntes | `00_inbox/` (después se procesan con el flujo 2) |
    | Resumen de un paper o PDF académico | `04_sources/literature/` (a un PDF sin ficha, ofrécele crearla: la ficha es lo que entra al grafo) |
    | Recorte o ficha de una página web | `04_sources/web/` |
-   | Informe, documento de trabajo o entregable | `05_deliverables/<reports, diagrams, data o presentations>/` |
-   | Canvas de Obsidian (`.canvas`) | `05_deliverables/diagrams/` |
+   | Informe, documento de trabajo o entregable (también versiones finales ya enviadas) | `05_exports/<reports, diagrams, data o presentations>/` |
+   | Canvas de Obsidian (`.canvas`) | `05_exports/diagrams/` |
    | Adjunto: imagen o PDF que una nota incrusta ("usado por" mayor que 0) | La misma carpeta que la nota que lo usa |
-   | Versión final ya enviada | `05_deliverables/...` y una copia en `06_exports/` |
-   | Algo que no sabes qué es (código, zips, formatos raros) | Se queda donde está; pregunta |
+      | Algo que no sabes qué es (código, zips, formatos raros) | Se queda donde está; pregunta |
 
    Reglas:
    - Los archivos conservan su nombre. Excepción: dos archivos con el mismo nombre
@@ -55,7 +54,7 @@ en `.brainify/`, fuera del grafo.
        {"de": "Reuniones/2024-05-02 Kickoff.md", "a": "00_inbox/", "tags": ["reuniones"]},
        {"de": "Ideas/precio por uso.md", "a": "01_knowledge/", "frontmatter": {"tipo": "conocimiento"}, "tags": ["ideas"]},
        {"de": "Cliente A/ideas.md", "a": "00_inbox/ideas-cliente-a.md", "tags": ["cliente-a"]},
-       {"de": "diagrama journey.png", "a": "05_deliverables/diagrams/"}
+       {"de": "diagrama journey.png", "a": "05_exports/diagrams/"}
      ]
    }
    ```

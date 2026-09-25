@@ -6,9 +6,8 @@
 graphify-out/
 
 # 2. Inbox (captura cruda que aún no es conocimiento: entra al grafo cuando se
-#    procesa en notas atómicas) y exports finales (copias para compartir)
+#    procesa en notas atómicas)
 00_inbox/
-06_exports/
 
 # 3. Borradores del skill, plantillas y configuración de Claude: sus
 #    placeholders <...> ensuciarían el grafo del proyecto.

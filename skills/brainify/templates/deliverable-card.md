@@ -2,14 +2,13 @@
 titulo: "<Nombre del entregable>"
 tipo: entregable
 formato: <informe html | diagrama | excel | word | keynote | pptx | figma | otro>
-archivo: "<05_deliverables/<subcarpeta>/nombre-v1.ext>"
-pdf: "<05_deliverables/presentations/nombre-v1.pdf o no aplica>"
+archivo: "<05_exports/<subcarpeta>/nombre-v1.ext>"
+pdf: "<05_exports/presentations/nombre-v1.pdf o no aplica>"
 version: <v1>
 fecha: <AAAA-MM-DD>
 estado: <borrador | en revisión | final>
 audiencia: "<para quién es>"
 generado_con: "<skill o herramienta que lo generó>"
-export_final: "<06_exports/proyecto-entregable-v1-AAAA-MM-DD.ext o aún no>"
 proyecto: "<nombre del proyecto>"
 tags: [entregable, <tema>]
 relacionadas: ["[[decision-que-lo-sustenta]]", "[[fuente-que-lo-sustenta]]"]
@@ -26,7 +25,7 @@ Instrucciones de la plantilla (bórralas al crear la ficha):
 
 # <Nombre del entregable>
 
-**Archivo:** [<nombre-v1.ext>](<nombre-v1.ext>) · **PDF indexable:** [<nombre-v1.pdf>](<nombre-v1.pdf>) · **Export final:** `<ruta en 06_exports/ o aún no>`
+**Archivo:** [<nombre-v1.ext>](<nombre-v1.ext>) · **PDF indexable:** [<nombre-v1.pdf>](<nombre-v1.pdf>)
 
 ## Qué es
 Una o dos frases: qué contiene, para quién y para qué decisión o momento del

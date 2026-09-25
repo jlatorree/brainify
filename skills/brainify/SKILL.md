@@ -63,8 +63,7 @@ plantilla, nota concreta), ábrelo directo.
   archive/                preguntas graduadas
 04_sources/literature/    una ficha por paper (+ su PDF si lo hay, fuera del grafo)
 04_sources/web/           fichas de fuentes web
-05_deliverables/          reports/, diagrams/, data/, presentations/ (con fichas)
-06_exports/               copias finales para compartir (fuera del grafo)
+05_exports/               entregables: reports/, diagrams/, data/, presentations/ (con fichas)
 CLAUDE.md                 hace que cada sesión en la carpeta use brainify
 .graphifyignore           qué queda fuera del grafo
 .brainify/                respaldos, inbox ya procesado, registros e inventario (fuera del grafo)
@@ -114,7 +113,7 @@ en la actualización de una nota existente.
      `.brainify/inbox-procesado/AAAA-MM-DD/` (`mkdir -p` y `mv`), un respaldo fuera de
      Obsidian y del grafo.
    - Archivos con valor propio, a su carpeta: PDF de un paper a `04_sources/literature/`
-     junto a su ficha, entregable a `05_deliverables/`, imagen de apoyo junto a la nota
+     junto a su ficha, entregable a `05_exports/`, imagen de apoyo junto a la nota
      que la incrusta.
 7. Sincroniza. Si el lote traía imágenes, Office o PDFs que no son papers, lectura
    profunda al final.
@@ -158,8 +157,8 @@ fichas, informe con doble cita y conexiones con el proyecto.
 
 ### 6. Entregables e informes ("haz un informe de...", "dónde guardo este entregable")
 
-Sigue `references/entregables.md`: dónde vive cada tipo, fichas, presentaciones a PDF,
-versiones y exports.
+Sigue `references/entregables.md`: dónde vive cada tipo, fichas, presentaciones a PDF
+y versiones.
 
 ### 7. Notas añadidas a mano ("añadí notas nuevas")
 

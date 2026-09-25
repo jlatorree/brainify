@@ -9,7 +9,7 @@ una fuente que la investigación abrió de verdad. Si no hay evidencia, se dice 
 encontré evidencia sólida sobre...").
 
 **Terminado cuando:** cada fuente usada tiene su ficha, cada DOI respondió 302, cada
-afirmación del informe tiene doble cita, el informe está en `05_deliverables/reports/`
+afirmación del informe tiene doble cita, el informe está en `05_exports/reports/`
 y el grafo está sincronizado.
 
 ## 1. Encargo
@@ -42,7 +42,7 @@ y el grafo está sincronizado.
    `templates/web-source.md`. Si la ficha ya existía, se amplía.
 3. **PDFs:** si el usuario tiene el PDF de un paper, va junto a su ficha con el mismo
    nombre base. Queda a mano para él y fuera del grafo, donde lo representa su ficha.
-4. **Informe** en `05_deliverables/reports/informe-<tema>-<AAAA-MM-DD>.md`: pregunta,
+4. **Informe** en `05_exports/reports/informe-<tema>-<AAAA-MM-DD>.md`: pregunta,
    resumen ejecutivo, hallazgos, evidencia en contra o debates, implicaciones para el
    proyecto (con wikilinks a decisiones y preguntas), límites de la revisión y lista de
    fuentes. Cada afirmación con doble cita:

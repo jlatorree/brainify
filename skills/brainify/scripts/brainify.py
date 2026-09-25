@@ -28,12 +28,11 @@ from urllib.parse import unquote
 
 ESTRUCTURA = [
     "00_inbox", "01_knowledge", "02_decisions", "03_open_questions/archive",
-    "04_sources/literature", "04_sources/web", "05_deliverables/reports",
-    "05_deliverables/diagrams", "05_deliverables/data", "05_deliverables/presentations",
-    "06_exports",
+    "04_sources/literature", "04_sources/web", "05_exports/reports",
+    "05_exports/diagrams", "05_exports/data", "05_exports/presentations",
 ]
 RAICES_ESTRUCTURA = {"00_inbox", "01_knowledge", "02_decisions", "03_open_questions",
-                     "04_sources", "05_deliverables", "06_exports"}
+                     "04_sources", "05_exports"}
 # Carpetas que nunca se recorren ni se mueven
 PROTEGIDAS = {".git", ".obsidian", ".trash", ".claude", ".brainify", "graphify-out",
               "node_modules", ".claude-plugin"}

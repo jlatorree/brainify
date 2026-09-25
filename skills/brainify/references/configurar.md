@@ -28,7 +28,7 @@ el mensaje final.
 3. **Carpetas** (`mkdir -p` respeta lo que ya existe):
 
    ```bash
-   mkdir -p 00_inbox 01_knowledge 02_decisions 03_open_questions/archive 04_sources/literature 04_sources/web 05_deliverables/reports 05_deliverables/diagrams 05_deliverables/data 05_deliverables/presentations 06_exports
+   mkdir -p 00_inbox 01_knowledge 02_decisions 03_open_questions/archive 04_sources/literature 04_sources/web 05_exports/reports 05_exports/diagrams 05_exports/data 05_exports/presentations
    ```
 4. **`.graphifyignore`:** copia `templates/graphifyignore` del skill como
    `.graphifyignore`. Si ya existe, agrega al final solo las líneas que le falten.
@@ -60,7 +60,7 @@ el mensaje final.
 
    ```
    Listo, este proyecto ya funciona con brainify:
-   - Creé las carpetas: inbox, conocimiento, decisiones, preguntas, fuentes, entregables y exports.
+   - Creé las carpetas: inbox, conocimiento, decisiones, preguntas, fuentes y exports.
    - Creé CLAUDE.md: cada sesión nueva en esta carpeta arrancará usando brainify y el grafo.
    - El grafo se crea con la primera nota y lo mantendré al día mientras trabajamos.
    Para empezar, deja apuntes o notas de reunión en 00_inbox y dime "procesa el inbox".
