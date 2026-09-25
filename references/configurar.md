@@ -11,7 +11,10 @@ el mensaje final.
 1. **Carpeta.** El proyecto es la carpeta donde se abrió Claude Code (`pwd`). Si es la
    carpeta personal (`~`), el Escritorio, Documentos a secas o una carpeta del
    sistema, pregunta en qué carpeta vive el proyecto antes de crear nada.
-2. **Graphify.** Corre `graphify --version`.
+2. **Python 3 y Graphify.** Corre `xcode-select -p`. Si falla, faltan las herramientas
+   de línea de comandos de Apple (traen Python 3): corre `xcode-select --install`, pide
+   al usuario que acepte el aviso de macOS y que te avise cuando termine. Luego corre
+   `graphify --version`.
    - Si falta: pide OK en una línea. Con el OK, `uv tool install "graphifyy[pdf,office]"`
      y luego `graphify install`. Si tampoco hay `uv` y hay Homebrew (`brew --version`),
      antes `brew install uv` (con el mismo OK). Sin Homebrew, explica en simple que

@@ -46,9 +46,19 @@ Abre Claude Code en la carpeta del proyecto, escribe **brainify** y habla normal
 Según la carpeta, brainify **configura** (vacía), **ordena** (con avance previo, con un
 solo OK y reversible) o te **pone al día** (ya usa brainify).
 
+## Requisitos
+
+- **Mac con Claude Code.**
+- **[Homebrew](https://brew.sh)**: instálalo tú antes, porque pide tu contraseña. Trae de
+  paso Python 3, que brainify también usa.
+
+La primera vez, y con tu OK, brainify instala el resto: Graphify y sus extras para leer
+**PDF, Word y Excel**. Sin esos extras, esos archivos quedan fuera del grafo.
+
+Opcional: **Keynote**, para exportar presentaciones a PDF y que entren al grafo.
+
 ## Instalación
 
-Necesitas **Claude Code en Mac**; Graphify lo instala brainify la primera vez, con tu OK.
 En el **chat** de Claude Code (no en la terminal):
 
     /plugin marketplace add jlatorree/brainify
@@ -93,8 +103,3 @@ solo cuando hace falta, y el inbox y los PDFs de papers quedan fuera del grafo.
 | `templates/` | Nota, ficha de paper, web y entregable, `CLAUDE.md` y `.graphifyignore`. |
 | `scripts/brainify.py` | Estado, índice y orden sin romper enlaces. Python 3, sin dependencias. |
 | `.claude-plugin/` | Manifiestos del plugin y del marketplace. |
-
----
-
-*Motor del grafo: [Graphify](https://github.com/Graphify-Labs/graphify). Inspirado en
-[Many Brains](https://github.com/jlatorree/many-brains).*
