@@ -88,10 +88,10 @@ solo cuando hace falta, y el inbox y los PDFs de papers quedan fuera del grafo.
 
 | Archivo | Rol |
 | --- | --- |
-| `skills/brainify/SKILL.md` | El skill: vocabulario, estructura y flujos. |
-| `skills/brainify/references/` | Configurar, ordenar, investigar, entregables y problemas con Graphify. |
-| `skills/brainify/templates/` | Nota, ficha de paper, web y entregable, `CLAUDE.md` y `.graphifyignore`. |
-| `skills/brainify/scripts/brainify.py` | Estado, índice y orden sin romper enlaces. Python 3, sin dependencias. |
+| `SKILL.md` | El skill: vocabulario, estructura y flujos. |
+| `references/` | Configurar, ordenar, investigar, entregables y problemas con Graphify. |
+| `templates/` | Nota, ficha de paper, web y entregable, `CLAUDE.md` y `.graphifyignore`. |
+| `scripts/brainify.py` | Estado, índice y orden sin romper enlaces. Python 3, sin dependencias. |
 | `.claude-plugin/` | Manifiestos del plugin y del marketplace. |
 
 ---
