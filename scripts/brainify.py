@@ -2,6 +2,7 @@
 """Herramienta de brainify: estado del proyecto y orden sin romper enlaces.
 
 Subcomandos (se corren desde la raíz del proyecto):
+  sincroniza   graphify update . y deja solo el último respaldo del grafo
   estado       resumen compacto para ponerse al día (inbox, preguntas, decisiones, grafo)
   nombres      índice de nombres de notas por carpeta (para detectar duplicados)
   inventario   lista lo que hay y qué falta ordenar -> .brainify/inventario.json
@@ -874,6 +875,41 @@ def correr(cmd, raiz):
         return None
 
 
+RE_FECHA = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def limpiar_respaldos_grafo(raiz):
+    """Graphify guarda en graphify-out/AAAA-MM-DD/ una copia del grafo antes de
+    sobrescribirlo, una carpeta por día. Deja solo la más reciente."""
+    out = os.path.join(raiz, "graphify-out")
+    if not os.path.isdir(out):
+        return []
+    fechas = sorted(n for n in os.listdir(out)
+                    if RE_FECHA.match(n) and os.path.isdir(os.path.join(out, n)))
+    borradas = []
+    for n in fechas[:-1]:
+        try:
+            shutil.rmtree(os.path.join(out, n))
+            borradas.append(n)
+        except OSError as e:
+            print("No pude borrar el respaldo %s: %s" % (n, e))
+    return borradas
+
+
+def cmd_sincroniza(args):
+    raiz = os.path.abspath(args.raiz)
+    exe = shutil.which("graphify")
+    if not exe:
+        print("No encuentro el comando graphify (ver references/problemas.md).")
+        sys.exit(1)
+    r = subprocess.run([exe, "update", "."], cwd=raiz)
+    if r.returncode != 0:
+        sys.exit(r.returncode)
+    borradas = limpiar_respaldos_grafo(raiz)
+    if borradas:
+        print("Respaldos viejos del grafo borrados: %s (queda el último)." % ", ".join(borradas))
+
+
 NOMBRES_CAT = {"pdf": "PDFs", "imagen": "imágenes", "office": "archivos de Office",
                "web": "páginas HTML", "video_audio": "videos o audios", "otro": "otros archivos"}
 
@@ -1046,6 +1082,7 @@ def main():
     p = argparse.ArgumentParser(description="Estado y orden de un proyecto brainify, sin romper enlaces.")
     p.add_argument("--raiz", default=".", help="carpeta del proyecto (por defecto, la actual)")
     sub = p.add_subparsers(dest="cmd")
+    sub.add_parser("sincroniza")
     sub.add_parser("estado")
     sub.add_parser("nombres")
     inv = sub.add_parser("inventario")
@@ -1059,7 +1096,7 @@ def main():
     d.add_argument("--registro")
     sub.add_parser("a-wikilinks")
     args = p.parse_args()
-    comandos = {"estado": cmd_estado, "nombres": cmd_nombres, "inventario": cmd_inventario, "respaldo": cmd_respaldo, "mover": cmd_mover,
+    comandos = {"sincroniza": cmd_sincroniza, "estado": cmd_estado, "nombres": cmd_nombres, "inventario": cmd_inventario, "respaldo": cmd_respaldo, "mover": cmd_mover,
                 "verificar": cmd_verificar, "deshacer": cmd_deshacer,
                 "a-wikilinks": cmd_a_wikilinks}
     if args.cmd not in comandos:

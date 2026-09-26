@@ -1,6 +1,6 @@
 {
   "name": "brainify",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Segundo cerebro de proyectos con Graphify, en carpetas de notas markdown (ideal para Obsidian): configura y ordena la carpeta, procesa el inbox en notas atómicas conectadas, gestiona preguntas y decisiones, guarda la investigación de literatura con doble cita y organiza entregables. Gasta pocos tokens: consulta el grafo en vez de releerlo todo.",
   "author": {
     "name": "Jonathan Latorre",

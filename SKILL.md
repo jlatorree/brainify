@@ -1,6 +1,6 @@
 ---
 name: brainify
-description: 'Segundo cerebro de proyectos con Graphify, en carpetas de notas markdown (ideal para Obsidian). Úsalo cuando el usuario diga "brainify" o quiera: configurar u ordenar la carpeta del proyecto, ponerse al día, procesar el inbox o notas de reunión, guardar algo que surgió ("guarda esto"), revisar o resolver preguntas abiertas, investigar literatura académica, hacer un informe, guardar un entregable, o avise que añadió notas.'
+description: 'Segundo cerebro de proyectos con Graphify, en carpetas de notas markdown (ideal para Obsidian). Úsalo cuando el usuario diga "brainify" o quiera: configurar u ordenar la carpeta del proyecto, ponerse al día, procesar, leer o consumir el inbox o notas de reunión, guardar algo que surgió ("guarda esto"), revisar o resolver preguntas abiertas, investigar literatura académica, hacer un informe, guardar un entregable, o avise que añadió notas.'
 ---
 
 # Brainify
@@ -16,6 +16,11 @@ hiciste, dónde quedó y qué sigue (di "conexiones" y "notas", no "edges" ni "n
 1. Si la carpeta actual no tiene `CLAUDE.md` con la sección `## brainify`, sigue
    `references/configurar.md` antes de cualquier otra cosa.
 2. Atiende lo pedido con su flujo. Si solo dijo "brainify", ponlo al día (flujo 1).
+3. **Inbox, siempre procesado:** si en cualquier momento lees o encuentras archivos en
+   `00_inbox/` (lo pidió el usuario, `BRAIN estado` los lista o los abriste para otra
+   tarea), procésalos con el flujo 2 hasta vaciarlo, sin esperar a que lo pida.
+   "Consumir", "leer" o "usar" lo del inbox es procesarlo. Un archivo del inbox nunca
+   se usa solo como contexto y se deja ahí.
 
 Los archivos del skill están en su carpeta: `scripts/brainify.py`, `templates/` y
 `references/`. En los comandos, `BRAIN` significa
@@ -27,8 +32,11 @@ proyecto.
 - **Nota atómica:** una idea por nota, creada con `templates/note.md`, con al menos un
   wikilink a una nota existente. Enlazar es construir el grafo: una nota sin enlaces
   es una isla.
-- **Sincroniza:** `graphify update .`. Gratis y en segundos: registra notas, títulos y
-  wikilinks, sin leer el contenido. Va después de escribir y antes de consultar.
+- **Sincroniza:** `BRAIN sincroniza`. Corre `graphify update .`, gratis y en segundos:
+  registra notas, títulos y wikilinks, sin leer el contenido. Va después de escribir y
+  antes de consultar. Además deja solo el respaldo más reciente de los que Graphify
+  guarda en `graphify-out/AAAA-MM-DD/` antes de sobrescribir el grafo (una carpeta por
+  día); el índice vigente es siempre `graphify-out/GRAPH_REPORT.md`.
 - **Lectura profunda:** invocar el skill `graphify` con los argumentos `. --update`.
   La IA lee el contenido de lo nuevo (PDFs, imágenes, Office) y extrae conceptos.
   Cuesta ~15.000 tokens de instrucciones más la lectura de cada archivo, así que va
@@ -42,7 +50,8 @@ proyecto.
   líneas. Detecta duplicados con él antes de crear notas; la consulta queda para
   preguntas de contenido.
 - **Mover, no borrar:** lo procesado se mueve (a su carpeta o a un respaldo en
-  `.brainify/`); borrar es solo a pedido explícito del usuario.
+  `.brainify/`); borrar es solo a pedido explícito del usuario. Única excepción: los
+  respaldos viejos del grafo que limpia `BRAIN sincroniza`.
 - **Gradúa:** convierte una pregunta resuelta en nota de conocimiento o decisión, y
   mueve la pregunta a `03_open_questions/archive/`.
 - **Doble cita:** cada afirmación con fuente lleva el link real y el wikilink a su
@@ -80,6 +89,7 @@ entre conocimiento, decisiones y preguntas.
 2. `BRAIN estado`: inbox, archivos fuera de la estructura, preguntas abiertas por
    prioridad, preguntas por graduar, últimas decisiones, lectura profunda pendiente y
    lo más conectado del grafo.
+   Si `estado` muestra inbox sin procesar, corre el flujo 2 antes de seguir.
 3. Si el usuario quiere más contexto sobre algún tema, una consulta.
 4. Resumen de hasta 8 líneas, cada una respaldada por la salida de `estado`:
 
@@ -87,11 +97,11 @@ entre conocimiento, decisiones y preguntas.
    **Dónde estamos:** 2 o 3 frases.
    **Últimas decisiones:** [[decision-...]], [[decision-...]]
    **Preguntas abiertas (N):** [[pregunta-...]] (alta), ...
-   **Inbox:** N sin procesar. ¿Los proceso?
+   **Inbox:** N procesados (flujo 2, antes de este resumen).
    **Pendiente:** solo lo que aplique (ordenar archivos, graduar preguntas, lectura profunda).
    ```
 
-### 2. Procesar el inbox ("procesa el inbox")
+### 2. Procesar el inbox ("procesa el inbox", "consume el inbox", o al encontrar archivos ahí)
 
 **Terminado cuando:** `00_inbox/` queda vacío, y cada pieza quedó en una nota atómica o
 en la actualización de una nota existente.
@@ -163,7 +173,7 @@ y versiones.
 ### 7. Notas añadidas a mano ("añadí notas nuevas")
 
 Sincroniza y corre `BRAIN estado`. Si trajo PDFs, imágenes u Office, ofrece la lectura
-profunda. Si dejó archivos fuera de la estructura, ofrece ordenarlos (flujo 8).
+profunda. Si dejó algo en `00_inbox/`, procésalo (flujo 2). Si dejó archivos fuera de la estructura, ofrece ordenarlos (flujo 8).
 
 ### 8. Ordenar la carpeta ("ordena esta carpeta")
 
