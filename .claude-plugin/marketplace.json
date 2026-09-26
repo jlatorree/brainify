@@ -1,21 +1,21 @@
 {
-  "name": "brainify",
+  "name": "brainme",
   "owner": {
     "name": "jlatorree",
     "url": "https://github.com/jlatorree"
   },
-  "description": "Brainify: un segundo cerebro por proyecto, con Graphify (ideal para Obsidian).",
+  "description": "Brainme: un segundo cerebro por proyecto, con Graphify (ideal para Obsidian).",
   "plugins": [
     {
-      "name": "brainify",
+      "name": "brainme",
       "source": "./",
       "description": "Segundo cerebro de proyectos con Graphify, en carpetas de notas markdown (ideal para Obsidian): configura y ordena la carpeta, procesa el inbox en notas atómicas conectadas, gestiona preguntas y decisiones, guarda la investigación de literatura con doble cita y organiza entregables. Gasta pocos tokens: consulta el grafo en vez de releerlo todo.",
       "author": {
         "name": "jlatorree",
         "url": "https://github.com/jlatorree"
       },
-      "homepage": "https://github.com/jlatorree/brainify",
-      "repository": "https://github.com/jlatorree/brainify",
+      "homepage": "https://github.com/jlatorree/brainme",
+      "repository": "https://github.com/jlatorree/brainme",
       "keywords": [
         "knowledge-management",
         "pkm",
@@ -26,7 +26,7 @@
         "research"
       ],
       "category": "productivity",
-      "version": "1.3.4"
+      "version": "2.0.0"
     }
   ]
 }

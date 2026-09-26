@@ -1,7 +1,7 @@
 # Deep research de literatura
 
 La investigación y la lectura de papers las hace Claude Code con su deep research, como
-siempre. Brainify le da el encargo y después almacena y procesa el resultado: fichas,
+siempre. Brainme le da el encargo y después almacena y procesa el resultado: fichas,
 informe con doble cita y conexiones con el proyecto.
 
 **Regla de oro:** cada afirmación del informe lleva **doble cita**, y cada referencia es

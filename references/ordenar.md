@@ -13,7 +13,7 @@ con ruta (`[[carpeta/nota]]`), los links relativos (`[texto](../nota.md)`) y los
 canvas; `BRAIN mover` los corrige todos: re-resuelve cada enlace como Obsidian
 (también si el vault está por encima del proyecto), deja por nombre los que pueden ir
 por nombre, respeta los bloques de código y los saltos de línea. Lo que genera queda
-en `.brainify/`, fuera del grafo.
+en `.brainme/`, fuera del grafo.
 
 1. **Inventario:** `BRAIN inventario --tabla`. Imprime un resumen y una línea compacta
    por archivo por ordenar: ruta, tipo, título, palabras, cuántas notas lo usan y una
@@ -42,9 +42,9 @@ en `.brainify/`, fuera del grafo.
 3. **Plan con un solo OK:** muestra una tabla por destino (cuántos archivos y
    ejemplos), la lista de dudosos y los renombres por nombre repetido. Es el único
    momento en que pides confirmación.
-4. **Respaldo:** `BRAIN respaldo` (zip en `.brainify/respaldos/`).
-5. **Mover:** escribe el plan en `.brainify/plan-orden.json` y corre
-   `BRAIN mover --plan .brainify/plan-orden.json`. Un `a` que termina en `/` conserva
+4. **Respaldo:** `BRAIN respaldo` (zip en `.brainme/respaldos/`).
+5. **Mover:** escribe el plan en `.brainme/plan-orden.json` y corre
+   `BRAIN mover --plan .brainme/plan-orden.json`. Un `a` que termina en `/` conserva
    el nombre del archivo:
 
    ```json
@@ -63,7 +63,7 @@ en `.brainify/`, fuera del grafo.
    conserva intacto. Si el plan tiene un error (origen inexistente, destino ocupado,
    dos archivos al mismo destino), `mover` no mueve nada y dice qué corregir. Al
    terminar borra las carpetas que quedaron vacías y deja un registro en
-   `.brainify/registros/`.
+   `.brainme/registros/`.
 6. **Wikilinks:** `BRAIN a-wikilinks` convierte los links markdown internos entre notas
    en wikilinks. En Obsidian funcionan igual, y Graphify solo lee los wikilinks
    cuando el nombre del archivo tiene espacios.
@@ -77,4 +77,4 @@ en `.brainify/`, fuera del grafo.
    inbox (flujo 2), por tandas si son muchos.
 10. **Deshacer:** si algo no le gusta, `BRAIN deshacer` devuelve cada archivo a su
     lugar y vuelve a corregir los enlaces (el frontmatter agregado se conserva).
-    Último recurso: el zip de `.brainify/respaldos/`.
+    Último recurso: el zip de `.brainme/respaldos/`.

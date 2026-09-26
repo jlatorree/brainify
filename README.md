@@ -1,4 +1,4 @@
-# brainify
+# brainme
 
 Un skill de **Claude Code** que convierte cada proyecto en un **segundo cerebro**: una
 carpeta de notas markdown que es a la vez grafo de conocimiento (ideal para abrirla en Obsidian). Para dejar de acumular
@@ -23,16 +23,16 @@ Cada proyecto es un **cerebro propio** con seis partes:
 El conocimiento vive en las **conexiones**, no en los documentos.
 
 1. **Enlazar es construir:** cada nota se conecta; Claude responde consultando el grafo.
-2. **Tú no programas:** brainify corre todo y te explica qué hizo.
+2. **Tú no programas:** brainme corre todo y te explica qué hizo.
 3. **Toda afirmación con su fuente:** doble cita, el link real y la ficha en el grafo.
 4. **Nada se pierde:** se mueve, no se borra; todo orden tiene respaldo y se deshace.
 5. **Barato por diseño:** ponerse al día es un comando; la lectura cara, solo si hace falta.
 
 ## Cómo se usa
 
-Abre Claude Code en la carpeta del proyecto, escribe **brainify** y habla normal:
+Abre Claude Code en la carpeta del proyecto, escribe **brainme** y habla normal:
 
-| Dices | brainify |
+| Dices | brainme |
 | --- | --- |
 | "ponme al día" | resume estado, decisiones, preguntas abiertas e inbox |
 | "procesa el inbox" | convierte apuntes y reuniones en notas conectadas |
@@ -43,16 +43,16 @@ Abre Claude Code en la carpeta del proyecto, escribe **brainify** y habla normal
 | "ordena esta carpeta" | reparte archivos sueltos sin romper enlaces |
 | "añadí notas nuevas" | pone el grafo al día |
 
-Según la carpeta, brainify **configura** (vacía), **ordena** (con avance previo, con un
-solo OK y reversible) o te **pone al día** (ya usa brainify).
+Según la carpeta, brainme **configura** (vacía), **ordena** (con avance previo, con un
+solo OK y reversible) o te **pone al día** (ya usa brainme).
 
 ## Requisitos
 
 - **Mac con Claude Code.**
 - **[Homebrew](https://brew.sh)**: instálalo tú antes, porque pide tu contraseña. Trae de
-  paso Python 3, que brainify también usa. [Guía paso a paso](https://claude.ai/artifact/D9QNftYYdY1QW4huHFPPGi).
+  paso Python 3, que brainme también usa. [Guía paso a paso](https://claude.ai/artifact/D9QNftYYdY1QW4huHFPPGi).
 
-La primera vez, y con tu OK, brainify instala el resto: Graphify y sus extras para leer
+La primera vez, y con tu OK, brainme instala el resto: Graphify y sus extras para leer
 **PDF, Word y Excel**. Sin esos extras, esos archivos quedan fuera del grafo.
 
 Opcional: **[Obsidian](https://obsidian.md)**, para ver y editar las notas, y **Keynote**,
@@ -62,17 +62,17 @@ para exportar presentaciones a PDF y que entren al grafo.
 
 En el **chat** de Claude Code (no en la terminal):
 
-    /plugin marketplace add jlatorree/brainify
-    /plugin install brainify@brainify
+    /plugin marketplace add jlatorree/brainme
+    /plugin install brainme@brainme
 
 Luego **abre una sesión nueva**: el plugin recién instalado aparece como skill desde ahí.
 
 ## Actualizar
 
-Activa el **auto-update** una vez: `/plugin` → **Marketplaces** → **brainify**. O a mano:
+Activa el **auto-update** una vez: `/plugin` → **Marketplaces** → **brainme**. O a mano:
 
-    /plugin marketplace update brainify
-    /plugin update brainify@brainify
+    /plugin marketplace update brainme
+    /plugin update brainme@brainme
     /reload-plugins
 
 ## La estructura
@@ -84,8 +84,8 @@ Activa el **auto-update** una vez: `/plugin` → **Marketplaces** → **brainify
 03_open_questions/        una pregunta por archivo (archive/ para las graduadas)
 04_sources/               literature/ (fichas de papers + PDFs) y web/
 05_exports/               entregables: reports/, diagrams/, data/, presentations/
-CLAUDE.md                 hace que cada sesión arranque con brainify
-.brainify/                respaldos, inbox procesado y registros (oculto)
+CLAUDE.md                 hace que cada sesión arranque con brainme
+.brainme/                respaldos, inbox procesado y registros (oculto)
 ```
 
 - **Nota** (`01`–`03`): lo que *sabes*. Viva, se amplía.
@@ -102,5 +102,5 @@ solo cuando hace falta, y el inbox y los PDFs de papers quedan fuera del grafo.
 | `SKILL.md` | El skill: vocabulario, estructura y flujos. |
 | `references/` | Configurar, ordenar, investigar, entregables y problemas con Graphify. |
 | `templates/` | Nota, ficha de paper, web y entregable, `CLAUDE.md` y `.graphifyignore`. |
-| `scripts/brainify.py` | Estado, índice y orden sin romper enlaces. Python 3, sin dependencias. |
+| `scripts/brainme.py` | Estado, índice y orden sin romper enlaces. Python 3, sin dependencias. |
 | `.claude-plugin/` | Manifiestos del plugin y del marketplace. |

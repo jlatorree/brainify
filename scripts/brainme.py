@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Herramienta de brainify: estado del proyecto y orden sin romper enlaces.
+"""Herramienta de brainme: estado del proyecto y orden sin romper enlaces.
 
 Subcomandos (se corren desde la raíz del proyecto):
   sincroniza   graphify update . y deja solo el último respaldo del grafo
   estado       resumen compacto para ponerse al día (inbox, preguntas, decisiones, grafo)
   nombres      índice de nombres de notas por carpeta (para detectar duplicados)
-  inventario   lista lo que hay y qué falta ordenar -> .brainify/inventario.json
-  respaldo     zip de todo el proyecto -> .brainify/respaldos/
+  inventario   lista lo que hay y qué falta ordenar -> .brainme/inventario.json
+  respaldo     zip de todo el proyecto -> .brainme/respaldos/
   mover        ejecuta un plan de movimientos y corrige los enlaces
   verificar    reporta enlaces rotos y nombres repetidos
   deshacer     revierte el último orden (o el registro indicado)
@@ -35,7 +35,7 @@ ESTRUCTURA = [
 RAICES_ESTRUCTURA = {"00_inbox", "01_knowledge", "02_decisions", "03_open_questions",
                      "04_sources", "05_exports"}
 # Carpetas que nunca se recorren ni se mueven
-PROTEGIDAS = {".git", ".obsidian", ".trash", ".claude", ".brainify", "graphify-out",
+PROTEGIDAS = {".git", ".obsidian", ".trash", ".claude", ".brainme", "graphify-out",
               "node_modules", ".claude-plugin"}
 # Se quedan donde están (no son "por ordenar")
 SE_QUEDAN_RAIZ = {"claude.md", "readme.md", "agents.md", ".graphifyignore", ".gitignore"}
@@ -488,8 +488,8 @@ def cmd_inventario(args):
         "enlaces_rotos_previos": len(rotos),
         "archivos": archivos,
     }
-    os.makedirs(os.path.join(raiz, ".brainify"), exist_ok=True)
-    destino = os.path.join(raiz, ".brainify", "inventario.json")
+    os.makedirs(os.path.join(raiz, ".brainme"), exist_ok=True)
+    destino = os.path.join(raiz, ".brainme", "inventario.json")
     with open(destino, "w", encoding="utf-8") as f:
         json.dump(salida, f, ensure_ascii=False, indent=1)
 
@@ -531,7 +531,7 @@ def cmd_inventario(args):
 
 def cmd_respaldo(args):
     raiz = os.path.abspath(args.raiz)
-    carpeta = os.path.join(raiz, ".brainify", "respaldos")
+    carpeta = os.path.join(raiz, ".brainme", "respaldos")
     os.makedirs(carpeta, exist_ok=True)
     destino = os.path.join(carpeta, "respaldo-%s.zip" % ahora())
     n = 0
@@ -539,7 +539,7 @@ def cmd_respaldo(args):
         for d, carpetas, archivos in os.walk(raiz):
             rel_d = os.path.relpath(d, raiz)
             carpetas[:] = [c for c in carpetas
-                           if not (rel_d == "." and c in {".brainify", "graphify-out", ".git", ".trash"})]
+                           if not (rel_d == "." and c in {".brainme", "graphify-out", ".git", ".trash"})]
             for a in archivos:
                 if a.lower() in IGNORAR_ARCHIVOS:
                     continue
@@ -734,7 +734,7 @@ def ejecutar_movimientos(raiz, movimientos, comun=None, etiqueta="orden"):
         os.makedirs(os.path.dirname(destino), exist_ok=True)
         if os.path.exists(destino) and clave(real) != clave(a):
             # destino liberado por otro movimiento aún no ejecutado: usar temporal
-            tmp = destino + ".brainify-tmp"
+            tmp = destino + ".brainme-tmp"
             os.rename(origen, tmp)
             hechos.append((real, a, tmp))
             continue
@@ -782,7 +782,7 @@ def ejecutar_movimientos(raiz, movimientos, comun=None, etiqueta="orden"):
         "archivos_con_enlaces_corregidos": reescritos,
         "carpetas_vacias_borradas": borradas,
     }
-    carpeta = os.path.join(raiz, ".brainify", "registros")
+    carpeta = os.path.join(raiz, ".brainme", "registros")
     os.makedirs(carpeta, exist_ok=True)
     ruta_reg = os.path.join(carpeta, "%s-%s.json" % (etiqueta, registro["fecha"]))
     with open(ruta_reg, "w", encoding="utf-8") as f:
@@ -824,7 +824,7 @@ def cmd_deshacer(args):
     raiz = os.path.abspath(args.raiz)
     ruta = args.registro
     if not ruta:
-        carpeta = os.path.join(raiz, ".brainify", "registros")
+        carpeta = os.path.join(raiz, ".brainme", "registros")
         regs = sorted(x for x in os.listdir(carpeta) if x.startswith("orden-")) if os.path.isdir(carpeta) else []
         if not regs:
             print("No hay ningún orden que deshacer.")
@@ -917,9 +917,9 @@ NOMBRES_CAT = {"pdf": "PDFs", "imagen": "imágenes", "office": "archivos de Offi
 def cmd_estado(args):
     raiz = os.path.abspath(args.raiz)
     texto_claude, _ = leer_texto(os.path.join(raiz, "CLAUDE.md"))
-    configurado = bool(texto_claude and "## brainify" in texto_claude)
+    configurado = bool(texto_claude and "## brainme" in texto_claude)
     print("Proyecto: %s | %s" % (os.path.basename(raiz),
-                                 "configurado con brainify" if configurado else "SIN CONFIGURAR"))
+                                 "configurado con brainme" if configurado else "SIN CONFIGURAR"))
     rels = listar_archivos(raiz)
 
     inbox = [r for r in rels if r.startswith("00_inbox/") and not r.startswith("00_inbox/archive/")]
@@ -1079,7 +1079,7 @@ def cmd_verificar(args):
 
 
 def main():
-    p = argparse.ArgumentParser(description="Estado y orden de un proyecto brainify, sin romper enlaces.")
+    p = argparse.ArgumentParser(description="Estado y orden de un proyecto brainme, sin romper enlaces.")
     p.add_argument("--raiz", default=".", help="carpeta del proyecto (por defecto, la actual)")
     sub = p.add_subparsers(dest="cmd")
     sub.add_parser("sincroniza")

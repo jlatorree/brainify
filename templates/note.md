@@ -57,5 +57,5 @@ El dato, la persona, el experimento o la investigación que cerraría esta pregu
 - [ ] <Tarea o duda que queda> → [[pregunta-...]] si aplica
 
 ## Actualizaciones
-<!-- Brainify añade aquí los cambios con fecha en vez de reescribir la nota -->
+<!-- Brainme añade aquí los cambios con fecha en vez de reescribir la nota -->
 - <AAAA-MM-DD>: <qué cambió y por qué>

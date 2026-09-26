@@ -2,7 +2,7 @@
 
 Referencia: repo oficial <https://github.com/Graphify-Labs/graphify> (paquete PyPI
 `graphifyy`, con doble y; el comando es `graphify`). Ante una duda sobre un flag, la
-fuente de verdad es `graphify --help` o ese README. Brainify se validó con
+fuente de verdad es `graphify --help` o ese README. Brainme se validó con
 graphify 0.9.65.
 
 | Síntoma | Qué hacer |

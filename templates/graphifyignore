@@ -16,10 +16,10 @@ docs/
 .claude/
 /CLAUDE.md
 
-# 4. Configuración y papelera de Obsidian, y respaldos y registros de brainify
+# 4. Configuración y papelera de Obsidian, y respaldos y registros de brainme
 .obsidian/
 .trash/
-.brainify/
+.brainme/
 
 # 5. Binarios pesados o que no aportan al grafo (ajusta a tu gusto)
 *.zip

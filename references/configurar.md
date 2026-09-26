@@ -1,10 +1,10 @@
 # Configurar un proyecto
 
-Se sigue cuando la carpeta actual no tiene `CLAUDE.md` con la sección `## brainify`.
+Se sigue cuando la carpeta actual no tiene `CLAUDE.md` con la sección `## brainme`.
 Todo lo haces tú; pides permiso solo donde se indica.
 
 **Terminado cuando:** existen las carpetas de la estructura, `.graphifyignore`, y
-`CLAUDE.md` con las secciones `## brainify` y `## graphify`; `BRAIN inventario` marca
+`CLAUDE.md` con las secciones `## brainme` y `## graphify`; `BRAIN inventario` marca
 0 archivos por ordenar (o solo los que el usuario decidió dejar); y el usuario recibió
 el mensaje final.
 
@@ -36,7 +36,7 @@ el mensaje final.
 4. **`.graphifyignore`:** copia `templates/graphifyignore` del skill como
    `.graphifyignore`. Si ya existe, agrega al final solo las líneas que le falten.
 5. **`CLAUDE.md`:** créalo desde `templates/CLAUDE.md` (nombre del proyecto = nombre de
-   la carpeta; fecha de hoy). Si ya existe, agrega al final la sección `## brainify`
+   la carpeta; fecha de hoy). Si ya existe, agrega al final la sección `## brainme`
    de la plantilla y conserva todo lo demás.
 6. **Graphify en cada sesión:** `graphify claude install`. Agrega la sección
    `## graphify` a `CLAUDE.md` y avisos automáticos en `.claude/settings.json`;
@@ -62,9 +62,9 @@ el mensaje final.
 9. **Mensaje final**, en pocas líneas, por ejemplo:
 
    ```
-   Listo, este proyecto ya funciona con brainify:
+   Listo, este proyecto ya funciona con brainme:
    - Creé las carpetas: inbox, conocimiento, decisiones, preguntas, fuentes y exports.
-   - Creé CLAUDE.md: cada sesión nueva en esta carpeta arrancará usando brainify y el grafo.
+   - Creé CLAUDE.md: cada sesión nueva en esta carpeta arrancará usando brainme y el grafo.
    - El grafo se crea con la primera nota y lo mantendré al día mientras trabajamos.
    Para empezar, deja apuntes o notas de reunión en 00_inbox y dime "procesa el inbox".
    ```

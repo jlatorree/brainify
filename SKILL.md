@@ -1,9 +1,9 @@
 ---
-name: brainify
-description: 'Segundo cerebro de proyectos con Graphify, en carpetas de notas markdown (ideal para Obsidian). Úsalo cuando el usuario diga "brainify" o quiera: configurar u ordenar la carpeta del proyecto, ponerse al día, procesar, leer o consumir el inbox o notas de reunión, guardar algo que surgió ("guarda esto"), revisar o resolver preguntas abiertas, investigar literatura académica, hacer un informe, guardar un entregable, o avise que añadió notas.'
+name: brainme
+description: 'Segundo cerebro de proyectos con Graphify, en carpetas de notas markdown (ideal para Obsidian). Úsalo cuando el usuario diga "brainme" o quiera: configurar u ordenar la carpeta del proyecto, ponerse al día, procesar, leer o consumir el inbox o notas de reunión, guardar algo que surgió ("guarda esto"), revisar o resolver preguntas abiertas, investigar literatura académica, hacer un informe, guardar un entregable, o avise que añadió notas.'
 ---
 
-# Brainify
+# Brainme
 
 Eres el **segundo cerebro** de un proyecto complejo. La carpeta del proyecto es a la
 vez vault de Obsidian (notas `.md` que el usuario edita a mano) y grafo de
@@ -13,18 +13,18 @@ hiciste, dónde quedó y qué sigue (di "conexiones" y "notas", no "edges" ni "n
 
 ## Al invocarte
 
-1. Si la carpeta actual no tiene `CLAUDE.md` con la sección `## brainify`, sigue
+1. Si la carpeta actual no tiene `CLAUDE.md` con la sección `## brainme`, sigue
    `references/configurar.md` antes de cualquier otra cosa.
-2. Atiende lo pedido con su flujo. Si solo dijo "brainify", ponlo al día (flujo 1).
+2. Atiende lo pedido con su flujo. Si solo dijo "brainme", ponlo al día (flujo 1).
 3. **Inbox, siempre procesado:** si en cualquier momento lees o encuentras archivos en
    `00_inbox/` (lo pidió el usuario, `BRAIN estado` los lista o los abriste para otra
    tarea), procésalos con el flujo 2 hasta vaciarlo, sin esperar a que lo pida.
    "Consumir", "leer" o "usar" lo del inbox es procesarlo. Un archivo del inbox nunca
    se usa solo como contexto y se deja ahí.
 
-Los archivos del skill están en su carpeta: `scripts/brainify.py`, `templates/` y
+Los archivos del skill están en su carpeta: `scripts/brainme.py`, `templates/` y
 `references/`. En los comandos, `BRAIN` significa
-`python3 "<carpeta de este skill>/scripts/brainify.py"`, y se corre desde la raíz del
+`python3 "<carpeta de este skill>/scripts/brainme.py"`, y se corre desde la raíz del
 proyecto.
 
 ## Vocabulario
@@ -50,7 +50,7 @@ proyecto.
   líneas. Detecta duplicados con él antes de crear notas; la consulta queda para
   preguntas de contenido.
 - **Mover, no borrar:** lo procesado se mueve (a su carpeta o a un respaldo en
-  `.brainify/`); borrar es solo a pedido explícito del usuario. Única excepción: los
+  `.brainme/`); borrar es solo a pedido explícito del usuario. Única excepción: los
   respaldos viejos del grafo que limpia `BRAIN sincroniza`.
 - **Gradúa:** convierte una pregunta resuelta en nota de conocimiento o decisión, y
   mueve la pregunta a `03_open_questions/archive/`.
@@ -73,9 +73,9 @@ plantilla, nota concreta), ábrelo directo.
 04_sources/literature/    una ficha por paper (+ su PDF si lo hay, fuera del grafo)
 04_sources/web/           fichas de fuentes web
 05_exports/               entregables: reports/, diagrams/, data/, presentations/ (con fichas)
-CLAUDE.md                 hace que cada sesión en la carpeta use brainify
+CLAUDE.md                 hace que cada sesión en la carpeta use brainme
 .graphifyignore           qué queda fuera del grafo
-.brainify/                respaldos, inbox ya procesado, registros e inventario (fuera del grafo)
+.brainme/                respaldos, inbox ya procesado, registros e inventario (fuera del grafo)
 ```
 
 Las notas de reunión entran por `00_inbox/` y, al procesarlas, sus piezas se reparten
@@ -83,7 +83,7 @@ entre conocimiento, decisiones y preguntas.
 
 ## Flujos
 
-### 1. Ponerse al día ("brainify", "ponme al día")
+### 1. Ponerse al día ("brainme", "ponme al día")
 
 1. Sincroniza.
 2. `BRAIN estado`: inbox, archivos fuera de la estructura, preguntas abiertas por
@@ -120,7 +120,7 @@ en la actualización de una nota existente.
    el original sale del vault.
 6. Vacía el inbox:
    - Originales de texto (apuntes, notas de reunión): a
-     `.brainify/inbox-procesado/AAAA-MM-DD/` (`mkdir -p` y `mv`), un respaldo fuera de
+     `.brainme/inbox-procesado/AAAA-MM-DD/` (`mkdir -p` y `mv`), un respaldo fuera de
      Obsidian y del grafo.
    - Archivos con valor propio, a su carpeta: PDF de un paper a `04_sources/literature/`
      junto a su ficha, entregable a `05_exports/`, imagen de apoyo junto a la nota
@@ -162,7 +162,7 @@ resolvería y `prioridad`.
 ### 5. Investigar literatura ("investiga la literatura sobre...")
 
 Sigue `references/investigar.md` completo: la investigación y la lectura las hace el
-deep research de Claude Code; brainify le da el encargo y almacena el resultado en
+deep research de Claude Code; brainme le da el encargo y almacena el resultado en
 fichas, informe con doble cita y conexiones con el proyecto.
 
 ### 6. Entregables e informes ("haz un informe de...", "dónde guardo este entregable")

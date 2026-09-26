@@ -1,7 +1,7 @@
 # Entregables e informes
 
 Los entregables ricos (diagramas, presentaciones, exceles, HTML) los generan otros
-skills; brainify decide dónde vive cada uno y lo conecta al grafo.
+skills; brainme decide dónde vive cada uno y lo conecta al grafo.
 
 **Terminado cuando:** el archivo está en su carpeta, tiene ficha si no es `.md`, la
 ficha enlaza lo que lo sustenta, y el grafo está sincronizado.
